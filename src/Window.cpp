@@ -23,3 +23,30 @@ Window::~Window() {
     DBG_PRINT("Destroying window\n");
     SDL_DestroyWindow(ptr_);
 }
+
+void Window::Display(std::shared_ptr<Drawable> object) {
+    displayed_objects_.push_back(object);
+}
+
+void Window::Refresh() {
+    renderer_->ClearBuffer();
+
+    for (auto it{ displayed_objects_.begin() }; it != displayed_objects_.end() ;) {
+        if (auto drawable{ it->lock() }) {
+            renderer_->AddSurfaceToBuffer(
+                drawable->GetSurface(), 
+                drawable->rectangle_,
+                drawable->angle_);
+            it++;
+        }
+        else {
+            it = displayed_objects_.erase(it);
+        }
+    }
+
+    renderer_->DisplayBuffer();
+}
+
+void Window::Undisplay(std::shared_ptr<Drawable> object) {
+    displayed_objects_.remove(object);
+}
