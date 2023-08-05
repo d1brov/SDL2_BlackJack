@@ -15,6 +15,8 @@ Window::Window(int width, int height, const std::string& title) {
     if (ptr_ == nullptr) {
         throw SdlException("Could not create window");
     }
+
+    renderer_ = std::make_unique<Renderer>(ptr_);
 }
 
 Window::~Window() {

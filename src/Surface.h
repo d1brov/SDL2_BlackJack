@@ -4,7 +4,11 @@
 
 #include <memory>
 
+class Renderer;
+
 class Surface {
+	friend Renderer;
+
 public:
 	Surface() = delete;
 	Surface(int width, int height, SDL_Color color);

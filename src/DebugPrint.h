@@ -13,5 +13,6 @@
 	#endif
 
 	extern int surface_counter;
+	extern int texture_counter;
 
 #endif
