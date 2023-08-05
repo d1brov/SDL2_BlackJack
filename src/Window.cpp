@@ -48,5 +48,9 @@ void Window::Refresh() {
 }
 
 void Window::Undisplay(std::shared_ptr<Drawable> object) {
-    displayed_objects_.remove(object);
+    displayed_objects_.remove_if(
+        [&object](std::weak_ptr<Drawable> it) {
+            return it.expired() || it.lock() == object;
+        }
+    );
 }
