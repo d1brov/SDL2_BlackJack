@@ -12,4 +12,6 @@
 		#define DBG_PRINT(msg) std::cout << msg
 	#endif
 
+	extern int surface_counter;
+
 #endif
