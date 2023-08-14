@@ -5,6 +5,10 @@ Drawable::Drawable(Rectangle rectangle, double angle)
 	, angle_(angle){
 }
 
+double Drawable::GetAngle() const {
+	return angle_;
+}
+
 Dimensions Drawable::GetDimensions() const {
 	return { rectangle_.w, rectangle_.h };
 }
@@ -15,6 +19,10 @@ Point Drawable::GetPosition() const {
 
 Rectangle Drawable::GetRectangle() const {
 	return rectangle_;
+}
+
+void Drawable::SetAngle(double angle) {
+	angle_ = angle;
 }
 
 void Drawable::SetDimensions(Dimensions dimensions) {

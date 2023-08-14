@@ -13,10 +13,12 @@ public:
 	virtual ~Drawable() = default;
 	virtual Surface* GetSurface() = 0;
 
+	double GetAngle() const;
 	Dimensions GetDimensions() const;
 	Point GetPosition() const;
 	Rectangle GetRectangle() const;
 
+	void SetAngle(double angle);
 	void SetDimensions(Dimensions dimensions);
 	void SetPosition(Point position);
 	void SetRectangle(Rectangle rectangle);
