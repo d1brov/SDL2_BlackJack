@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 
+extern int surface_counter;
+
 namespace sdl::surface::util {
 	/**
 	 * @brief Duplicates existing SDL_Surface* by creating new and copying.

@@ -13,10 +13,10 @@ public:
 	void AddSurfaceToBuffer(
 		Surface* surface, Rectangle rectangle, double angle = 0);
 	void ClearBuffer();
+	void FreeTextureMap() noexcept;
 	void DisplayBuffer();
 
 private:
-	int texture_counter_{};
 	SDL_Texture* RenderTexture(SDL_Surface* surface);
 	SDL_Renderer* ptr_{};
 	std::unordered_map<SDL_Surface*, SDL_Texture*> texture_map_{};

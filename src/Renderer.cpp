@@ -25,15 +25,9 @@ Renderer::Renderer(SDL_Window* window) {
 }
 
 Renderer::~Renderer() {
+    FreeTextureMap();
     DBG_PRINT("Destroying renderer\n");
     SDL_DestroyRenderer(ptr_);
-
-    DBG_FMT_PRINT("Freeing {} textures...", texture_counter_);
-    for (const auto& [surface, texture]: texture_map_) {
-        SDL_DestroyTexture(texture);
-        texture_counter_--;
-    }
-    DBG_PRINT("DONE\n");
 }
 
 void Renderer::AddSurfaceToBuffer(Surface* surface, Rectangle rectangle, double angle) {
@@ -55,6 +49,14 @@ void Renderer::ClearBuffer() {
     }
 }
 
+void Renderer::FreeTextureMap() noexcept {
+    DBG_FMT_PRINT("Freeing textures [{}] \n", texture_map_.size());
+    for (const auto& [surface, texture] : texture_map_) {
+        SDL_DestroyTexture(texture);
+    }
+    texture_map_.clear();
+}
+
 void Renderer::DisplayBuffer() {
     SDL_RenderPresent(ptr_);
 }
@@ -65,7 +67,7 @@ SDL_Texture* Renderer::RenderTexture(SDL_Surface* surface) {
     }
     else {
         if (auto texture{ SDL_CreateTextureFromSurface(ptr_, surface) }) {
-            DBG_PRINT(std::format("Creating texture [{}]\n", ++texture_counter_));
+            DBG_PRINT(std::format("Creating texture [{}]\n", texture_map_.size()+1));
             texture_map_[surface] = texture;
             return texture;
         }

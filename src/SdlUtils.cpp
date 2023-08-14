@@ -3,6 +3,8 @@
 #include "DebugPrint.h"
 #include "SdlException.h"
 
+int surface_counter = 0;
+
 SDL_Surface* sdl::surface::util::DuplicateSdlSurface(SDL_Surface* source) {
 	if (auto copy{ SDL_ConvertSurface(source, source->format, SDL_SWSURFACE) }) {
 		DBG_FMT_PRINT("Duplicating surface [{}]\n", ++surface_counter);

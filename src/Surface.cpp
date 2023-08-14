@@ -25,7 +25,7 @@ Surface::Surface(Surface&& other) noexcept
 }
 
 Surface::~Surface() {
-	DBG_FMT_PRINT("Freeing surface [{}]\n", --surface_counter);
+	DBG_FMT_PRINT("Freeing surface [{}]\n", surface_counter--);
 	SDL_FreeSurface(ptr_);
 }
 
